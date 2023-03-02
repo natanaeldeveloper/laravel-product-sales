@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use GuzzleHttp\Exception\BadResponseException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -43,6 +46,16 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        $this->renderable(function (Throwable $e) {
+
+            if($e instanceof NotFoundHttpException) {
+                return response()->json([
+                    'status'  => 404,
+                    'message' => 'Recurso não encontrado',
+                ], 404);
+            }
         });
     }
 }
