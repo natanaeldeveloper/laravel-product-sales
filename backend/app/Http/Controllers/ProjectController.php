@@ -70,7 +70,8 @@ class ProjectController extends Controller
 
         return response()->json([
             'status'    => 200,
-            'message'   => 'Projeto removido com sucesso'
+            'message'   => 'Projeto removido com sucesso',
+            "id"        => $project->id,
         ]);
     }
 }
