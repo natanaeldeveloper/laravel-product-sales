@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 
 import HomeScreen from "./screens/Home";
 import ProjectScreen from "./screens/Project";
+import ProjectEditScreen from "./screens/Project/Edit";
 
 const router = createBrowserRouter([
     {
@@ -9,8 +10,12 @@ const router = createBrowserRouter([
         element: <HomeScreen />
     },
     {
-        path: '/projects/:id',
+        path: '/projects/:projectId',
         element: <ProjectScreen />
+    },
+    {
+        path: '/projects/:projectId/edit',
+        element: <ProjectEditScreen />
     }
 ])
 
