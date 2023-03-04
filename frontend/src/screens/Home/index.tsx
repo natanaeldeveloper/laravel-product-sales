@@ -10,6 +10,7 @@ const { Meta } = Card;
 type ProjectProps = {
   id?: number,
   name?: string,
+  description?: string,
 }
 
 const HomeScreen: React.FC = () => {
@@ -17,11 +18,11 @@ const HomeScreen: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   const stopLoader = (checked: boolean) => {
-    setLoading(!checked);
+    setLoading(false);
   };
 
   const [projects, setProjects] = useState<Array<ProjectProps>>([
-    { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }
+    { id: 1 }, { id: 2 }, { id: 3 }
   ])
 
   useEffect(() => {
@@ -53,7 +54,7 @@ const HomeScreen: React.FC = () => {
                 <Link to={'projects/' + item.id}>
                   <Meta
                     title={item.name}
-                    description="Venda de Tapiocas" />
+                    description={item.description} />
                 </Link>
               </Skeleton>
             </Card>
