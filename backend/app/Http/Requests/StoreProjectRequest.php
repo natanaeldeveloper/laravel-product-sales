@@ -21,6 +21,7 @@ class StoreProjectRequest extends Request
     {
         return [
             'name' => 'required|min:3|max:255',
+            'description' => 'required|min:3|max:255',
         ];
     }
 
@@ -32,7 +33,8 @@ class StoreProjectRequest extends Request
     public function attributes(): array
     {
         return [
-            'name' => 'nome'
+            'name' => 'nome',
+            'description' => 'descrição'
         ];
     }
 }

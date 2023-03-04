@@ -23,6 +23,7 @@ class UpdateProjectRequest extends Request
     {
         return [
             'name' => 'required|min:3|max:255',
+            'description' => 'required|min:3|max:255',
         ];
     }
 
@@ -34,7 +35,8 @@ class UpdateProjectRequest extends Request
     public function attributes(): array
     {
         return [
-            'name' => 'nome'
+            'name' => 'nome',
+            'description' => 'descrição'
         ];
     }
 }
