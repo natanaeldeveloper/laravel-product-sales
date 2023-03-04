@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Card, Skeleton, Space } from 'antd';
-import { EditOutlined } from '@ant-design/icons'
+import { Button, Card, Skeleton, Space } from 'antd';
+import { EditOutlined, SettingOutlined } from '@ant-design/icons'
 
 import api from '../../services/api';
+import { Link } from 'react-router-dom';
 
 const { Meta } = Card;
 
@@ -20,12 +21,12 @@ const HomeScreen: React.FC = () => {
   };
 
   const [projects, setProjects] = useState<Array<ProjectProps>>([
-    { id: 1 }, { id: 2 }, { id: 3 }
+    { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }
   ])
 
   useEffect(() => {
     api
-      .get('api/projects')
+      .get('projects')
       .then(response => {
         setProjects(response.data.data)
         stopLoader(loading)
@@ -44,13 +45,16 @@ const HomeScreen: React.FC = () => {
               hoverable
               style={{ width: 240 }}
               actions={[
-                <EditOutlined key="edit" />
+                <SettingOutlined key="setting" />,
+                <Link to={'/projects/' + item.id + '/edit'}> <EditOutlined key="edit" /></Link>,
               ]}
             >
               <Skeleton loading={loading} active>
-                <Meta
-                  title={item.name}
-                  description="Venda de Tapiocas" />
+                <Link to={'projects/' + item.id}>
+                  <Meta
+                    title={item.name}
+                    description="Venda de Tapiocas" />
+                </Link>
               </Skeleton>
             </Card>
           )
