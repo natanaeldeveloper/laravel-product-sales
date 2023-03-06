@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use GuzzleHttp\Exception\BadResponseException;
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -50,11 +51,20 @@ class Handler extends ExceptionHandler
 
         $this->renderable(function (Throwable $e) {
 
-            if($e instanceof NotFoundHttpException) {
-                return response()->json([
-                    'status'  => 404,
-                    'message' => 'Recurso não encontrado',
-                ], 404);
+            if (env('APP_DEBUG') !== true) {
+                if ($e instanceof NotFoundHttpException) {
+                    return response()->json([
+                        'status'  => 404,
+                        'message' => 'Recurso não encontrado.',
+                    ], 404);
+                }
+
+                if ($e instanceof QueryException) {
+                    return response()->json([
+                        'status'  => 500,
+                        'message' => 'Erro de comunicação com o banco de dados.',
+                    ], 500);
+                }
             }
         });
     }
