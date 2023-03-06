@@ -31,7 +31,7 @@ class ProjectController extends Controller
 
         return response()->json([
             'status'    => 200,
-            'message'   => 'Projeto registrado com sucesso',
+            'message'   => 'Projeto registrado com sucesso.',
             'data'      => $project,
         ]);
     }
@@ -56,7 +56,7 @@ class ProjectController extends Controller
 
         return response()->json([
             'status'    => 200,
-            'message'   => 'Projeto atualizado com sucesso',
+            'message'   => 'Projeto atualizado com sucesso.',
             'data'      => $project,
         ]);
     }
@@ -70,7 +70,7 @@ class ProjectController extends Controller
 
         return response()->json([
             'status'    => 200,
-            'message'   => 'Projeto removido com sucesso',
+            'message'   => 'Projeto removido com sucesso.',
             "id"        => $project->id,
         ]);
     }
